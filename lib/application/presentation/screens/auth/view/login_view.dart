@@ -1,7 +1,9 @@
 import 'package:carrental/application/presentation/screens/auth/auth_bloc/bloc/auth_bloc.dart';
 import 'package:carrental/application/presentation/screens/auth/widgets/customtextformfield.dart';
+import 'package:carrental/domain/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:widget_circular_animator/widget_circular_animator.dart';
 
 class LoginViewWrapper extends StatelessWidget {
   const LoginViewWrapper({super.key});
@@ -23,8 +25,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
@@ -40,13 +42,13 @@ class _LoginPageState extends State<LoginPage> {
       if (state is AuthLoading) {
         return const Center(
           child: CircularProgressIndicator(
-            color: Colors.pink,
+            color: Colors.orange,
           ),
         );
       }
 
       if (state is Authenticated) {
-        WidgetsBinding.instance?.addPostFrameCallback((_) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
           Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
         });
       }
@@ -57,14 +59,24 @@ class _LoginPageState extends State<LoginPage> {
         height: double.infinity,
         width: double.infinity,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              "Login with Email",
-              style: Theme.of(context).textTheme.displayLarge,
+            const SizedBox(height: 100,),
+            const WidgetCircularAnimator(
+              size: 130,
+              child: Icon(
+                Icons.person,
+                size: 80,
+                color: kwhite,
+              ),
             ),
+            Text("Login ",
+                style: Theme.of(context)
+                    .textTheme
+                    .displayLarge!
+                    .copyWith(color: kwhite)),
             const SizedBox(
-              height: 20,
+              height: 120,
             ),
             CustomTextFormField(
                 controller: _emailController, hintText: "Enter Email"),
@@ -76,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                 controller: _passwordController,
                 hintText: "Enter Password"),
             const SizedBox(
-              height: 20,
+              height: 60,
             ),
             InkResponse(
               onTap: () {
@@ -104,18 +116,20 @@ class _LoginPageState extends State<LoginPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "New here?",
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
+                Text("New here?",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall!
+                        .copyWith(color: kwhite)),
                 TextButton(
                     onPressed: () {
                       Navigator.pushNamed(context, '/register');
                     },
-                    child: Text(
-                      "Register",
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ))
+                    child: Text("Register",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall!
+                            .copyWith(color: kwhite)))
               ],
             )
           ],

@@ -1,8 +1,9 @@
- 
 import 'package:carrental/application/presentation/screens/auth/model/usermodel.dart';
 import 'package:carrental/application/presentation/screens/auth/widgets/customtextformfield.dart';
+import 'package:carrental/domain/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:widget_circular_animator/widget_circular_animator.dart';
 
 import '../auth_bloc/bloc/auth_bloc.dart';
 
@@ -26,10 +27,10 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
 
   @override
   void dispose() {
@@ -43,19 +44,19 @@ class _RegisterPageState extends State<RegisterPage> {
     final authbloc = BlocProvider.of<AuthBloc>(context);
     return BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
       if (state is Authenticated) {
-        WidgetsBinding.instance?.addPostFrameCallback((_) {
-
+        WidgetsBinding.instance.addPostFrameCallback((_) {
           Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
         });
       }
 
       return Scaffold(
+          backgroundColor: scaffoldcolor,
           appBar: AppBar(
-            iconTheme: IconThemeData(color: Colors.white),
+            iconTheme: const IconThemeData(color: Colors.white),
             backgroundColor: const Color(0xfff263147),
           ),
           body: Container(
-              padding: EdgeInsets.symmetric(horizontal: 25),
+              padding: const EdgeInsets.symmetric(horizontal: 25),
               height: double.infinity,
               width: double.infinity,
               child: CustomScrollView(
@@ -63,38 +64,42 @@ class _RegisterPageState extends State<RegisterPage> {
                   SliverFillRemaining(
                     hasScrollBody: false,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                          const WidgetCircularAnimator(
+                            size: 130 ,
+                            child: Icon(Icons.person_add,size: 80,color: kwhite,),
+                            ),
                         Text(
-                          "Register with Email",
-                          style: Theme.of(context).textTheme.displayLarge,
+                          "Register",
+                          style: Theme.of(context).textTheme.displayLarge!.copyWith(color: kwhite)
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         CustomTextFormField(
                             controller: _emailController,
                             hintText: "Enter Email"),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         CustomTextFormField(
                             obscureText: true,
                             controller: _passwordController,
                             hintText: "Enter Password"),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         CustomTextFormField(
                             controller: _nameController,
                             hintText: "Enter Name"),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         CustomTextFormField(
                             controller: _phoneController,
                             hintText: "Enter Phone"),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         const SizedBox(
@@ -132,7 +137,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           children: [
                             Text(
                               "Already have an Account?",
-                              style: Theme.of(context).textTheme.bodySmall,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(color:kwhite),
                             ),
                             TextButton(
                                 onPressed: () {
@@ -140,7 +148,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 },
                                 child: Text(
                                   "Login",
-                                  style: Theme.of(context).textTheme.bodySmall,
+                                  style: Theme.of(context).textTheme.bodySmall!.copyWith(color: kwhite)
                                 ))
                           ],
                         )

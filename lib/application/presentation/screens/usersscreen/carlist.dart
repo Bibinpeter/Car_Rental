@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
+ 
 
-class Carlist extends StatelessWidget {
-  const Carlist({super.key});
+class CarListScreen extends StatelessWidget {
+  const CarListScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
-  }
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Choose Your Car'),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+      ),
+      body:  
+            Container()
+    );
+      
+}
 }
