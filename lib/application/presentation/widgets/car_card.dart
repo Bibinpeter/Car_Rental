@@ -1,3 +1,4 @@
+import 'package:carrental/application/presentation/screens/usersscreen/cardetailpage.dart';
 import 'package:carrental/data/models/car_model.dart';
 import 'package:flutter/material.dart';
  
@@ -11,10 +12,10 @@ class CarCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(builder: (context) => CardDetailsPage(car: car,))
-        // );
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CardDetailsPage(car: car,))
+        );
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -24,15 +25,14 @@ class CarCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow:const [
             BoxShadow(
-              color: Colors.black12,
-              blurRadius: 10,
-              spreadRadius: 5
+              color: Colors.white,
+              spreadRadius: 2
             )
           ]
         ),
         child: Column(
-          children: [
-            Image.asset('assets/car_image.png', height: 120,),
+          children: [ 
+            Image.asset('assets/images/car_image.png', height: 120,),
             Text(car.model, style:const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
           const  SizedBox(height: 10,),
             Row(
@@ -42,13 +42,13 @@ class CarCard extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Image.asset('assets/gps.png'),
+                        Image.asset('assets/images/gps.png'),
                         Text(' ${car.distance.toStringAsFixed(0)}km')
                       ],
                     ),
                     Row(
                       children: [
-                        Image.asset('assets/pump.png'),
+                        Image.asset('assets/images/pump.png'),
                         Text(' ${car.fuelCapacity.toStringAsFixed(0)}L')
                       ],
                     ),

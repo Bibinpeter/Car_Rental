@@ -7,6 +7,7 @@ class AuthInitial extends AuthState {}
 
 class AuthLoading extends AuthState{}
 
+// ignore: must_be_immutable
 class Authenticated extends AuthState{
 User? user;
   Authenticated(  this.user);

@@ -44,11 +44,12 @@ class _CardDetailsPageState extends State<CardDetailsPage> with SingleTickerProv
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black,
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.info_outline),
-            Text(' Information')
+            Icon(Icons.info_outline,color: Colors.amber,),
+            Text(' Information',style: TextStyle(color: Colors.amber),)
           ],
         ),
       ),
@@ -76,7 +77,7 @@ class _CardDetailsPageState extends State<CardDetailsPage> with SingleTickerProv
                     ),
                     child:const Column(
                       children: [
-                        CircleAvatar(radius: 40, backgroundImage: AssetImage('assets/user.png'),),
+                        CircleAvatar(radius: 40, backgroundImage: AssetImage('assets/images/user .png'),),
                         SizedBox(height: 10,),
                         Text('Jane Cooper',style: TextStyle(fontWeight: FontWeight.bold),),
                         Text('\$4,253',style: TextStyle(color: Colors.grey),),
@@ -110,7 +111,7 @@ class _CardDetailsPageState extends State<CardDetailsPage> with SingleTickerProv
                         child: Transform.scale(
                           scale: _animation!.value,
                           alignment: Alignment.center,
-                          child: Image.asset('assets/maps.png',fit: BoxFit.cover,),
+                          child: Image.asset('assets/images/maps.png',fit: BoxFit.cover,),
                         ),
                       ),
                     ),

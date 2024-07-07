@@ -7,18 +7,6 @@ import 'package:widget_circular_animator/widget_circular_animator.dart';
 
 import '../auth_bloc/bloc/auth_bloc.dart';
 
-class RegisterPageWrapper extends StatelessWidget {
-  const RegisterPageWrapper({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthBloc(),
-      child: RegisterPage(),
-    );
-  }
-}
-
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -36,6 +24,8 @@ class _RegisterPageState extends State<RegisterPage> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _nameController.dispose();
+    _phoneController.dispose();
     super.dispose();
   }
 
@@ -50,113 +40,109 @@ class _RegisterPageState extends State<RegisterPage> {
       }
 
       return Scaffold(
-          backgroundColor: scaffoldcolor,
-          appBar: AppBar(
-            iconTheme: const IconThemeData(color: Colors.white),
-            backgroundColor: const Color(0xfff263147),
-          ),
-          body: Container(
+        resizeToAvoidBottomInset: true,
+        body: Stack(
+          children: [
+            Positioned.fill(
+              child: Image.asset(
+                'assets/images/login.jpg',  
+                fit: BoxFit.cover,
+              ),
+            ),
+            Container(
               padding: const EdgeInsets.symmetric(horizontal: 25),
               height: double.infinity,
               width: double.infinity,
-              child: CustomScrollView(
-                slivers: [
-                  SliverFillRemaining(
-                    hasScrollBody: false,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                          const WidgetCircularAnimator(
-                            size: 130 ,
-                            child: Icon(Icons.person_add,size: 80,color: kwhite,),
-                            ),
-                        Text(
-                          "Register",
-                          style: Theme.of(context).textTheme.displayLarge!.copyWith(color: kwhite)
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 100,),
+                    const WidgetCircularAnimator(
+                       outerColor: Colors.orange,
+                      innerColor: Colors.orange,
+                      size: 130,
+                      child: Icon(Icons.person_add, size: 80, color: kwhite),
+                    ),
+                    Text(
+                      "Register",
+                      style: Theme.of(context).textTheme.displayLarge!.copyWith(color: kwhite),
+                    ),
+                    const SizedBox(height: 20),
+                    CustomTextFormField(
+                      keyboardType: TextInputType.emailAddress,
+                      controller: _emailController,
+                      hintText: "Enter Email",
+                    ),
+                    const SizedBox(height: 20),
+                    CustomTextFormField(
+                      obscureText: true,
+                      controller: _passwordController,
+                      hintText: "Enter Password",
+                    ),
+                    const SizedBox(height: 20),
+                    CustomTextFormField(
+                      controller: _nameController,
+                      hintText: "Enter Name",
+                    ),
+                    const SizedBox(height: 20),
+                    CustomTextFormField(
+                      keyboardType: TextInputType.number ,
+                      controller: _phoneController,
+                      hintText: "Enter Phone",
+                    ),
+                    const SizedBox(height: 40),
+                    InkResponse(
+                      onTap: () {
+                        Usermodel user = Usermodel(
+                          name: _nameController.text,
+                          email: _emailController.text,
+                          password: _passwordController.text,
+                          phone: _phoneController.text,
+                        );
+                        authbloc.add(SignupEvent(user: user));
+                      },
+                      child: Container(
+                        height: 52,
+                        width: 250,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.orange,
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        CustomTextFormField(
-                            controller: _emailController,
-                            hintText: "Enter Email"),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        CustomTextFormField(
-                            obscureText: true,
-                            controller: _passwordController,
-                            hintText: "Enter Password"),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        CustomTextFormField(
-                            controller: _nameController,
-                            hintText: "Enter Name"),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        CustomTextFormField(
-                            controller: _phoneController,
-                            hintText: "Enter Phone"),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        InkResponse(
-                          onTap: () {
-                            Usermodel user = Usermodel(
-                                name: _nameController.text,
-                                email: _emailController.text,
-                                password: _passwordController.text,
-                                phone: _phoneController.text);
-
-                            authbloc.add(SignupEvent(user: user));
-                          },
-                          child: Container(
-                            height: 52,
-                            width: 250,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: Colors.orange),
-                            child: Center(
-                              child: Text(
-                                "Register",
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                            ),
+                        child: Center(
+                          child: Text(
+                            "Register",
+                            style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ),
-                        const SizedBox(
-                          height: 20,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Already have an Account?",
+                          style: Theme.of(context).textTheme.bodySmall!.copyWith(color: kwhite),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Already have an Account?",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall!
-                                  .copyWith(color:kwhite),
-                            ),
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Text(
-                                  "Login",
-                                  style: Theme.of(context).textTheme.bodySmall!.copyWith(color: kwhite)
-                                ))
-                          ],
-                        )
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            "Login",
+                            style: Theme.of(context).textTheme.bodySmall!.copyWith(color: kwhite),
+                          ),
+                        ),
                       ],
                     ),
-                  )
-                ],
-              )));
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
     });
   }
 }

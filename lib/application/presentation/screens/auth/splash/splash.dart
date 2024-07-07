@@ -1,6 +1,4 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:carrental/application/presentation/screens/auth/auth_bloc/bloc/auth_bloc.dart';
-import 'package:carrental/application/presentation/screens/auth/view/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,12 +27,28 @@ class SplashPage extends StatelessWidget {
             Navigator.pushReplacementNamed(context, '/onboarding');
           }
         },
-        child: AnimatedSplashScreen(
-          splash: Image.asset('assets/images/splashcar.png'),
-          splashIconSize: 350,
-          nextScreen: LoginPage(),
-          splashTransition: SplashTransition.scaleTransition,
-          duration: 2000,
-        ));
+        child:Scaffold(
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              child: Image.asset(
+                'assets/images/splashcar.png',
+                height: 350,
+                width: 350,
+              ),
+            ),
+            Text(
+              "Firebase Bloc App",
+              style: Theme.of(context).textTheme.displayLarge,
+            )
+          ],
+        ),
+      ),
+    ),
+    );
   }
 }

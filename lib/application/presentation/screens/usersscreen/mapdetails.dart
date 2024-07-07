@@ -30,7 +30,7 @@ class MapsDetailsPage extends StatelessWidget {
             children: [
           TileLayer(
             urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-            subdomains: const ['a','b','c',],
+              subdomains: const ['a','b','c',],
           )
             ]
             
@@ -48,7 +48,7 @@ class MapsDetailsPage extends StatelessWidget {
 }
 
 Widget carDetailsCard({required Car car}) {
-  return SizedBox(
+  return SizedBox( 
     height: 350,
     child: Stack(
       children: [
@@ -140,7 +140,7 @@ Widget carDetailsCard({required Car car}) {
         Positioned(
           top: 50,
           right: 20,
-          child: Image.asset('assets/white_car.png'),
+          child: Image.asset('assets/images/white_car.png'),
         ),
       ],
     ),

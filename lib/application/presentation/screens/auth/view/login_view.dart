@@ -5,18 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:widget_circular_animator/widget_circular_animator.dart';
 
-class LoginViewWrapper extends StatelessWidget {
-  const LoginViewWrapper({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthBloc(),
-      child: LoginPage(),
-    );
-  }
-}
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -54,87 +42,106 @@ class _LoginPageState extends State<LoginPage> {
       }
 
       return Scaffold(
-          body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
-        height: double.infinity,
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+        resizeToAvoidBottomInset: true,
+        body: Stack(
           children: [
-            const SizedBox(height: 100,),
-            const WidgetCircularAnimator(
-              size: 130,
-              child: Icon(
-                Icons.person,
-                size: 80,
-                color: kwhite,
+           
+            Positioned.fill(
+              child: Image.asset(
+                'assets/images/login.jpg',  
+                fit: BoxFit.cover,
               ),
             ),
-            Text("Login ",
-                style: Theme.of(context)
-                    .textTheme
-                    .displayLarge!
-                    .copyWith(color: kwhite)),
-            const SizedBox(
-              height: 120,
-            ),
-            CustomTextFormField(
-                controller: _emailController, hintText: "Enter Email"),
-            const SizedBox(
-              height: 20,
-            ),
-            CustomTextFormField(
-                obscureText: true,
-                controller: _passwordController,
-                hintText: "Enter Password"),
-            const SizedBox(
-              height: 60,
-            ),
-            InkResponse(
-              onTap: () {
-                authblocc.add(LoginEvent(
-                    password: _passwordController.text.trim(),
-                    email: _emailController.text.trim()));
-              },
-              child: Container(
-                height: 52,
-                width: 250,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.orange),
-                child: Center(
-                  child: Text(
-                    "Login",
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              height: double.infinity,
+              width: double.infinity,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 100,),
+                    const WidgetCircularAnimator(
+                      outerColor: Colors.orange,
+                      innerColor: Colors.orange,
+                      size: 130,
+                      child: Icon(
+                        Icons.person,
+                        size: 80,
+                        color: kwhite,
+                      ),
+                    ),
+                    Text("Login ",
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge!
+                            .copyWith(color: kwhite)),
+                    const SizedBox(
+                      height: 120,
+                    ),
+                    CustomTextFormField(
+                      keyboardType: TextInputType.emailAddress,
+                        controller: _emailController, hintText: "Enter Email"),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomTextFormField(
+                        obscureText: true,
+                        controller: _passwordController,
+                        hintText: "Enter Password"),
+                    const SizedBox(
+                      height: 60,
+                    ),
+                    InkResponse(
+                      onTap: () {
+                        authblocc.add(LoginEvent(
+                            password: _passwordController.text.trim(),
+                            email: _emailController.text.trim()));
+                      },
+                      child: Container(
+                        height: 52,
+                        width: 250,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: Colors.orange),
+                        child: Center(
+                          child: Text(
+                            "Login",
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("New here?",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall!
+                                .copyWith(color: kwhite)),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/register');
+                            },
+                            child: Text("Register",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall!
+                                    .copyWith(color: kwhite)))
+                      ],
+                    )
+                  ],
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("New here?",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
-                        .copyWith(color: kwhite)),
-                TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/register');
-                    },
-                    child: Text("Register",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall!
-                            .copyWith(color: kwhite)))
-              ],
-            )
           ],
         ),
-      ));
+      );
     });
   }
 }
+ 

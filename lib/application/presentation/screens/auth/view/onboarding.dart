@@ -41,7 +41,7 @@ class OnboardingPage extends StatelessWidget {
                   height: 54,
                   child: ElevatedButton(
                       onPressed: (){
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => LoginViewWrapper(),));
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(),));
                       },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.black,

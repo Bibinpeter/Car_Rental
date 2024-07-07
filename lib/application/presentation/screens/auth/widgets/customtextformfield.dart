@@ -13,21 +13,19 @@ class CustomTextFormField extends StatefulWidget {
   final TextStyle? errorStyle;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
-  // ignore: prefer_typing_uninitialized_variables
-  final type;
+  final TextInputType? keyboardType;
   final TextStyle? style;
-  // ignore: prefer_typing_uninitialized_variables
-  final maxlines;
+  final int maxLines;
 
   const CustomTextFormField({
     super.key,
     this.hintstyle,
     this.errorStyle,
+    this.keyboardType,
     this.readOnly = false,
     this.style,
     required this.controller,
-    this.maxlines = 1,
-    this.type = TextInputType.text,
+    this.maxLines = 1,
     required this.hintText,
     this.obscureText = false,
     this.validator,
@@ -38,7 +36,6 @@ class CustomTextFormField extends StatefulWidget {
   });
 
   @override
-  // ignore: library_private_types_in_public_api
   _CustomTextFormFieldState createState() => _CustomTextFormFieldState();
 }
 
@@ -50,8 +47,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return TextFormField(
       readOnly: widget.readOnly,
       style: widget.style ?? Theme.of(context).textTheme.bodySmall!.copyWith(color: const Color.fromARGB(255, 194, 87, 87)),
-      maxLines: widget.maxlines,
-      keyboardType: widget.type,
+      maxLines: widget.maxLines,
+      keyboardType: widget.keyboardType,
       controller: widget.controller,
       decoration: InputDecoration(
         errorStyle: const TextStyle(color: Colors.red),
