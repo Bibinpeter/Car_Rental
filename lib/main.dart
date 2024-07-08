@@ -6,7 +6,7 @@ import 'package:carrental/application/presentation/screens/auth/view/onboarding.
 import 'package:carrental/application/presentation/screens/auth/view/register.dart';
 import 'package:carrental/application/presentation/screens/usersscreen/carlist.dart';
 import 'package:carrental/firebase_options.dart';
-import 'package:carrental/domain/usescases/injection_container.dart';
+import 'package:carrental/injection_container.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,10 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  // Initialize dependency injection
   initInjection();
-
   runApp(const MyApp());
 }
 
