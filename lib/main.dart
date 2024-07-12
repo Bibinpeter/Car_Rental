@@ -2,7 +2,7 @@ import 'package:carrental/application/bloc/bloc/car_bloc.dart';
 import 'package:carrental/application/presentation/screens/auth/auth_bloc/bloc/auth_bloc.dart';
 import 'package:carrental/application/presentation/screens/auth/splash/splash.dart';
 import 'package:carrental/application/presentation/screens/auth/view/login_view.dart';
-import 'package:carrental/application/presentation/screens/auth/view/onboarding.dart';
+import 'package:carrental/application/presentation/screens/usersscreen/onboarding.dart';
 import 'package:carrental/application/presentation/screens/auth/view/register.dart';
 import 'package:carrental/application/presentation/screens/usersscreen/carlist.dart';
 import 'package:carrental/firebase_options.dart';
